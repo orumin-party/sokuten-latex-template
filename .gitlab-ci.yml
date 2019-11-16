@@ -14,5 +14,5 @@ correcting:
 typeset:
   image: akahana/texlive-with-sourcehanfonts:2018
   script:
-    - latexmk -pdf manuscript
+    - latexmk -lualatex manuscript
   stage: build
