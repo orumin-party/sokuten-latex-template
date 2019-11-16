@@ -1,0 +1,116 @@
+\RequirePackage{titlesec}
+\RequirePackage{xcolor}
+\RequirePackage{listings}
+\RequirePackage{fancyvrb}
+
+\newif\if@popls\@poplsfalse
+\DeclareOption{preprint}{
+	\@poplstrue
+}
+\ExecuteOptions{}
+\ProcessOptions\relax
+
+%% 行送りを二分四分に設定
+\setlength{\baselineskip}{1.75\zh}
+
+%% geometryが死ぬので手動でmargin設定をする
+%% 天地アキの設定
+%% {top, bottom} = {18mm, 18mm}
+\setlength{\textheight}{\paperheight}
+\setlength{\topmargin}{-7.4truemm}
+\addtolength{\topmargin}{-\headheight}
+\addtolength{\topmargin}{-\headsep}
+\addtolength{\textheight}{-36truemm}
+
+%% 左右アキの設定
+%% {left, right} = {18mm, 18mm}
+\setlength{\textwidth}{\paperwidth}
+\setlength{\oddsidemargin}{-7.4truemm}
+\setlength{\evensidemargin}{\oddsidemargin}
+\addtolength{\textwidth}{-36truemm}
+
+\if@popls
+	% b5j(W : 182mm, H : 257mm)を上下左右3mmずつ伸ばす
+	\setlength{\paperwidth}{188truemm}
+	\setlength{\paperheight}{263truemm}
+	% ページ左からのアキに3mmを加える
+	\addtolength{\oddsidemargin}{3truemm}
+	\setlength{\evensidemargin}{\oddsidemargin}
+	% ページ上からのアキに3mmを加える
+	\addtolength{\topmargin}{3truemm}
+	% papersize specialを発行してdviファイルの用紙サイズも変更
+	\AtBeginDvi{\special{papersize=\the\paperwidth,\the\paperheight}}
+\fi
+
+% フッターにノンブルを入れるので本文領域から少し下にずらす
+\addtolength{\footskip}{2\zh}
+
+% TODO: もう少し重た目にする。見出しフォントはよりボールドに
+% 各見出しはすべてボールドにするくらいでよい
+
+\renewcommand{\hrulefill}{%
+\global\@tempdima.32\zh \advance \@tempdima .2pt 
+\leavevmode \leaders\hrule height \@tempdima depth -.30\zh \hfill \kern .5\zw
+}
+
+\def\@makechapterhead#1{%
+	{\parindent \z@ \raggedright
+	\normalfont\gtfamily\bfseries\Huge
+	\interlinepenalty\@M
+	\global\setbox\@currbox=\hbox{\thechapter: }
+	\setlength{\hangindent}{\wd\@currbox}
+	{\thechapter : {#1}}
+	\@makechapterauthor
+	\parindent \z@
+	\par\nobreak
+	\vskip 1\Cvs}
+	}
+
+\def\@makechapterauthor{%
+	\normalfont\ttfamily\large
+	\par\setlength{\parindent}{\wd\@currbox}
+	\setlength{\hangindent}{\parindent}
+	\addtolength{\hangindent}{1.25\zw}
+	{\hrulefill {\@author}}
+}
+
+\titleformat{\section}[hang]{\normalfont\gtfamily\bfseries\fontsize{\@xivpt\jsc@mpt}{\n@baseline\jsc@mpt}\selectfont}%
+{\rule[2.4truept]{5truept}{5truept}}%
+{.34\zw}{}[]
+\titleformat{\subsection}[hang]{\normalfont\large\gtfamily\bfseries}%
+{\color[gray]{0.6}{\rule[1.65truept]{5truept}{5truept}}}%
+{4.76truept}{}[]
+
+\def\ps@plainfoot{%
+	\let\@mkboth\@gobbletwo
+	\let\@evenhead\@empty
+	\let\@oddhead\@empty
+	\def\@evenfoot{\thepage\quad\small{\color[gray]{0.2}}\leftmark\hss}%
+	\def\@oddfoot{\hfil{\small\color[gray]{0.2}\rightmark}\quad\thepage}%
+}
+\let\ps@plain\ps@plainfoot
+\renewcommand{\chaptermark}[1]{\markboth{\textsc{\expandafter\@title}}{#1}}
+\renewcommand{\sectionmark}[1]{\chaptermark{#1}}
+
+\lstset{
+	basicstyle=\ttfamily\footnotesize,
+	commentstyle=\textit,
+	classoffset=1,
+	keywordstyle=\bfseries,
+	frame=tb,
+	framesep=5pt,
+	showstringspaces=false,
+	tabsize=2,
+	aboveskip=0.75\zw,
+	belowskip=1.75\zw,
+	backgroundcolor=\color[gray]{0.9},
+	breaklines=true, % 長い行の自動改行を有効化
+	breakautoindent=true
+}
+\renewcommand{\lstlistingname}{ソースコード} % キャプションに表示される名前を変更
+\def\lst@lettertrue{\let\lst@ifletter\iffalse}
+
+\fvset{fontsize=\footnotesize,
+		breaklines=true,
+		breakanywhere=true,
+		breaksymbolleft=}
