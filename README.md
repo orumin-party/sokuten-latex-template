@@ -5,20 +5,19 @@
 ```
 +- images/         # 画像ファイル
     +- sample.png  # サンプル画像
-+- sample.adoc     # サンプルファイル
-+- manuscript.adoc # 原稿ファイル
-+- Makefile        # プレビュー用Makefile
-+- latexmk         # latexmkビルド設定ファイル
++- sample.tex      # サンプルファイル
++- manuscript.tex  # 原稿ファイル
++- latexmkrc       # latexmkビルド設定ファイル
 ```
 
 ## Prerequisites
 
-- TeX Live 2019 full
+- TeX Live 2023 full
 
 ## How to build
 
 ```
-latexmk -pdf manuscript
+latexmk -pdflua manuscript
 ```
 
 すると5回くらいビルドが入ってmanuscript.pdfが生まれる

@@ -1,58 +1,10 @@
-\documentclass[b5j,papersize,twocolumn]{ltjsarticle}
-
-\usepackage{luatex85,luatexja}
-\usepackage{graphicx, xcolor}
-\usepackage{mathtools, amssymb}
-\usepackage[utf8x]{luainputenc}
-\usepackage{textcomp}
-\usepackage[unicode]{hyperref}
-\usepackage{titlesec, titletoc}
-\usepackage{fancyvrb}
-\usepackage{fvextra}
-\usepackage{listings}
-\usepackage{bxjalipsum}
-
-% 欧文組版のマイクロタイポグラフィー（細かな読み易さの調整）を有効化
-\usepackage{microtype}
-
-% フォントのエンコード
-\usepackage[T1]{fontenc}
-
-% OTF フォント（和文フォント）
-\usepackage{luacode}
-\usepackage{luatexja-ruby}
-\usepackage{luatexja-otf}
-\usepackage[no-embed,deluxe,jis2004]{luatexja-preset} % 源ノ角／源ノ明朝フォント
-
-% フォント設定（数式）
-\usepackage[math-style=ISO,bold-style=ISO]{unicode-math}
-
-% フォント設定（欧文）
-% main ... 本文フォント。ローマン体。\textrm で使用
-% sans ... ヒゲのないフォント。サンセリフ体（和文で言うゴシック体）。\textsf で使用
-% mono ... 固定幅フォント。タイプライタ体。ソースコードのリストに使う。\texttt で使用
-% math ... 数式フォント
-%
-\setmathfont{TeX Gyre Termes Math}
-%\setmathfont{TeX Gyre Pagella Math}
-\setmainfont[Ligatures=TeX, Scale=0.95]{TeX Gyre Termes}
-%\setmainfont[Ligatures=TeX, Scale=0.95]{TeX Gyre Pagella}
-\setsansfont[Ligatures=TeX, Scale=0.95]{TeX Gyre Heros}
-%\setsansfont[Ligatures=TeX, Scale=0.9]{TeX Gyre Adventor}
-\setmonofont[Ligatures=TeX, Scale=1]{TeX Gyre Cursor}
-
-% TeX Gyre フォントと OTF フォントの共存
-\renewcommand{\bfdefault}{bx}
-\renewcommand{\headfont}{\gtfamily\sffamily\bfseries}
-
-\usepackage{orumin}
+\documentclass{sokuten}
 
 \title{記事タイトル}
 \author{著者名}
 \date{}
 
 \begin{document}
-\pagestyle{empty}
 \maketitle
 
 \section{執筆時のお約束}
@@ -65,7 +17,7 @@
 	\end{itemize}
 	\item 図を挿入するときは必ずグレースケールに変換してください
 	\begin{itemize}
-		\item 対応するフォーマットはPDF,PNGです
+		\item 対応するフォーマットはPDF, PNGです
 	\end{itemize}
 	\item ソースコードを挿入するときは\verb|listing|環境を使ってください\footnote{\url{https://ctan.org/pkg/listings}}
 	\item 図表を入れたときは文中で参照するようにしましょう
@@ -81,12 +33,6 @@
 \end{quote}
 
 これは松尾芭蕉が我らが党首おるみんのように時空間を把握することができたことを示している。
-\begin{figure}[tb]
-	\centering
-	\includegraphics[width=0.8\linewidth]{images/oruminparty_sticker.png}
-	\caption{おるみん党ステッカー}
-	\label{img:sample}
-\end{figure}
 
 \begin{lstlisting}
 int main(int argc, char *argv[]) {
@@ -94,4 +40,12 @@ int main(int argc, char *argv[]) {
 	return 0;
 }
 \end{lstlisting}
+
+\begin{figure}[tb]
+	\centering
+	\includegraphics[width=0.8\linewidth]{images/oruminparty_sticker.png}
+	\caption{おるみん党ステッカー}
+	\label{img:sample}
+\end{figure}
+
 \end{document}
