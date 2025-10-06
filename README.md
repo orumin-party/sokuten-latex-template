@@ -13,7 +13,7 @@
 
 ## Prerequisites
 
-- TeX Live 2019 full
+TODO: Specify the version of TeX Live. omasanori confirmed that this works with 2024 and 2025.
 
 ## How to build
 
